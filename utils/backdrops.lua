@@ -1,6 +1,6 @@
-local wezterm = require('wezterm')
-local platform = require('utils.platform')()
-local colors = require('colors.custom')
+local wezterm = require("wezterm")
+local platform = require("utils.platform")()
+local colors = require("colors.custom")
 
 -- Seeding random numbers before generating for use
 -- Known issue with lua math library
@@ -10,7 +10,7 @@ math.random()
 math.random()
 math.random()
 
-local PATH_SEP = platform.is_win and '\\' or '/'
+local PATH_SEP = platform.is_win and "\\" or "/"
 
 ---@class BackDrops
 ---@field current_idx number index of current image
@@ -39,7 +39,7 @@ end
 ---   This throws a coroutine error if the function is invoked in outside of `wezterm.lua` in the -
 ---   initial load of the Terminal config.
 function BackDrops:set_files()
-    self.files = wezterm.read_dir(wezterm.config_dir .. PATH_SEP .. 'backdrops')
+    self.files = wezterm.read_dir(wezterm.config_dir .. PATH_SEP .. "backdrops")
     wezterm.GLOBAL.background = self.files[1]
     return self
 end
@@ -52,12 +52,12 @@ function BackDrops:_set_opt(window)
         background = {
             {
                 source = { File = wezterm.GLOBAL.background },
-                horizontal_align = 'Center',
+                horizontal_align = "Center",
             },
             {
                 source = { Color = colors.background },
-                height = '100%',
-                width = '100%',
+                height = "100%",
+                width = "100%",
                 opacity = 0.96,
             },
         },
@@ -70,7 +70,7 @@ end
 function BackDrops:choices()
     local choices = {}
     for idx, file in ipairs(self.files) do
-        local name = file:match('([^' .. PATH_SEP .. ']+)$')
+        local name = file:match("([^" .. PATH_SEP .. "]+)$")
         table.insert(choices, {
             id = tostring(idx),
             label = name,
@@ -120,7 +120,7 @@ end
 ---@param idx number index of the `files` array
 function BackDrops:set_img(window, idx)
     if idx > #self.files or idx < 0 then
-        wezterm.log_error('Index out of range')
+        wezterm.log_error("Index out of range")
         return
     end
 

@@ -1,4 +1,4 @@
-local wezterm = require('wezterm')
+local wezterm = require("wezterm")
 
 ---@class Config
 ---@field options table
@@ -19,7 +19,7 @@ function Config:append(new_options)
     for k, v in pairs(new_options) do
         if self.options[k] ~= nil then
             wezterm.log_warn(
-                'Duplicate config option detected: ',
+                "Duplicate config option detected: ",
                 { old = self.options[k], new = new_options[k] }
             )
         else
