@@ -8,13 +8,12 @@ local options = {
 if platform.is_win then
     options.default_prog = { "pwsh" }
     options.launch_menu = {
-        { label = "PowerShell Core", args = { "pwsh" } },
-        { label = "PowerShell Desktop", args = { "powershell" } },
-        { label = "Command Prompt", args = { "cmd" } },
-        { label = "Nushell", args = { "nu" } },
+        { label = " PowerShell v1", args = { "powershell" } },
+        { label = " PowerShell v7", args = { "pwsh" } },
+        { label = " Cmd", args = { "cmd" } },
         {
-            label = "Git Bash",
-            args = { "C:\\Users\\kevin\\scoop\\apps\\git\\current\\bin\\bash.exe" },
+            label = " GitBash",
+            args = { "C:\\Program1\\Git\\bin\\bash.exe" },
         },
     }
 elseif platform.is_mac then

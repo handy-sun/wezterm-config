@@ -37,24 +37,24 @@ local colorscheme = {
     selection_bg = mocha.surface2,
     selection_fg = mocha.text,
     ansi = {
-        "#0C0C0C", -- black
-        "#C50F1F", -- red
-        "#13A10E", -- green
-        "#C19C00", -- yellow
-        "#0037DA", -- blue
-        "#881798", -- magenta/purple
-        "#3A96DD", -- cyan
-        "#CCCCCC", -- white
+        "#1E1E1E", -- black
+        "#EC5F66", -- red
+        "#99C794", -- green
+        "#F9AE58", -- yellow
+        "#6699CC", -- blue
+        "#C695C6", -- magenta/purple
+        "#5FB4B4", -- cyan
+        "#F7F7F7", -- white
     },
     brights = {
-        "#767676", -- black
-        "#E74856", -- red
-        "#16C60C", -- green
-        "#F9F1A5", -- yellow
-        "#3B78FF", -- blue
-        "#B4009E", -- magenta/purple
-        "#61D6D6", -- cyan
-        "#F2F2F2", -- white
+        "#B4B4A6", -- black
+        "#F97B58", -- red
+        "#ACD1A8", -- green
+        "#FAC761", -- yellow
+        "#85ADD6", -- blue
+        "#D8B6D8", -- magenta/purple
+        "#82C4C4", -- cyan
+        "#FAFAFA", -- white
     },
     tab_bar = {
         background = "rgba(0, 0, 0, 0.4)",
