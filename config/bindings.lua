@@ -54,13 +54,13 @@ local keys = {
     { key = "Backspace",  mods = mod.SUPER,     action = act.SendString "\x15" },
 
     -- copy/paste --
-    { key = "c",          mods = "CTRL|SHIFT",  action = act.CopyTo("Clipboard") },
-    { key = "v",          mods = "CTRL|SHIFT",  action = act.PasteFrom("Clipboard") },
+    -- { key = "c",          mods = "CTRL|SHIFT",  action = act.CopyTo("Clipboard") },
+    { key = "Insert",     mods = "SHIFT",       action = act.PasteFrom("Clipboard") },
 
     -- tabs --
     -- tabs: spawn+close
     { key = "t",          mods = mod.SUPER,     action = act.SpawnTab("DefaultDomain") },
-    { key = "t",          mods = mod.SUPER_REV, action = act.SpawnTab({ DomainName = "WSL:Ubuntu" }) },
+    -- { key = "t",          mods = mod.SUPER_REV, action = act.SpawnTab({ DomainName = "WSL:Ubuntu" }) },
     { key = "w",          mods = mod.SUPER_REV, action = act.CloseCurrentTab({ confirm = false }) },
 
     -- tabs: navigation
@@ -186,6 +186,14 @@ local mouse_bindings = {
         event = { Up = { streak = 1, button = "Left" } },
         mods = "CTRL",
         action = act.OpenLinkAtMouseCursor,
+    },
+    {
+        event = { Up = { streak = 1, button = "Left" } },
+        action = act.CopyTo("Clipboard"),
+    },
+    {
+        event = { Up = { streak = 1, button = "Right" } },
+        action = act.PasteFrom("Clipboard"),
     },
 }
 

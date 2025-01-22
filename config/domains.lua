@@ -9,10 +9,10 @@ return {
     wsl_domains = {
         {
             name = "WSL:Ubuntu",
-            distribution = "Ubuntu",
-            username = "kevin",
-            default_cwd = "/home/kevin",
-            default_prog = { "fish", "-l" },
+            distribution = "Ubuntu20.04",
+            -- username = "root",
+            default_cwd = "~",
+            -- default_prog = { "fish", "-l" },
         },
     },
 }
