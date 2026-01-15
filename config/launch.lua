@@ -12,8 +12,9 @@ if platform.is_win then
         { label = " PowerShell v7", args = { "pwsh" } },
         { label = " Cmd", args = { "cmd" } },
         {
+            --- install by chocolaty
             label = " GitBash",
-            args = { "C:\\Program1\\Git\\bin\\bash.exe" },
+            args = { "C:\\Program Files\\Git\\bin\\bash.exe" },
         },
     }
 elseif platform.is_mac then
