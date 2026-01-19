@@ -1,7 +1,6 @@
 local wezterm = require("wezterm")
 -- local gpu_adapters = require("utils.gpu_adapter")
 local custom = require("colors.custom")
--- local fonts = require('config.fonts')
 
 return {
     term = "xterm-256color",
