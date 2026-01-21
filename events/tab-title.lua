@@ -40,12 +40,12 @@ M.set_title = function(process_name, static_title, active_title, max_width, inse
     local title
     inset = inset or 6
 
-    if process_name:len() > 0 and static_title:len() == 0 then
-        title = "  " .. process_name .. " ~ " .. " "
-    elseif static_title:len() > 0 then
-        title = "󰌪  " .. static_title .. " ~ " .. " "
+    if string.find(process_name, "pwsh") ~= nil or string.find(process_name, "powershell") ~= nil then
+        title = "󰖳  " .. active_title .. " ~ "
+    elseif string.find(process_name, "wsl") ~= nil then
+        title = "󰌽  " .. active_title .. " ~ "
     else
-        title = "󰌽  " .. active_title .. " ~ " .. " "
+        title = "󰌪  " .. active_title .. " "
     end
 
     if title:len() > max_width - inset then
