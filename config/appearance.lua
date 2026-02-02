@@ -5,8 +5,8 @@ local custom = require("colors.custom")
 return {
     term = "xterm-256color",
     animation_fps = 60,
-    max_fps = 60,
-    front_end = "WebGpu",
+    max_fps = 120,
+    front_end = "WebGpu", ---@type 'WebGpu' | 'OpenGL' | 'Software'
     webgpu_power_preference = "HighPerformance",
     -- webgpu_preferred_adapter = gpu_adapters:pick_best(),
 
