@@ -13,6 +13,5 @@ return Config:init()
     :append(require("config.fonts"))
     :append(require("config.general"))
     :append(require("config.launch"))
-    :append(require("config.domains"))
-    .options
+    :append(require("config.domains")).options
 -- append(require("config.domains")) overrrides some default_tab (contains .ssh/config)

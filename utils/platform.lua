@@ -15,13 +15,13 @@ local function platform()
     local os
 
     if is_win then
-       os = 'windows'
+        os = "windows"
     elseif is_linux then
-       os = 'linux'
+        os = "linux"
     elseif is_mac then
-       os = 'mac'
+        os = "mac"
     else
-       error('Unknown platform')
+        error("Unknown platform")
     end
 
     return {
