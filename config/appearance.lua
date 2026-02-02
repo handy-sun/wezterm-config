@@ -10,8 +10,8 @@ return {
     webgpu_power_preference = "HighPerformance",
     -- webgpu_preferred_adapter = gpu_adapters:pick_best(),
 
-    -- color scheme
-    color_scheme = custom.colorscheme,
+    -- color_scheme = 'Ocean (base16)',
+    color_scheme = "qimocha",
 
     -- background
     window_background_opacity = 1.00,
