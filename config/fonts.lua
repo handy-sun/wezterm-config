@@ -1,5 +1,7 @@
+local platform = require("utils.platform")
+
 return {
-    font_size = 12,
+    font_size = platform().is_mac and 16 or 12,
     font = require("wezterm").font("NotoMono NFM"),
     --ref: https://wezfurlong.org/wezterm/config/lua/config/freetype_pcf_long_family_names.html#why-doesnt-wezterm-use-the-distro-freetype-or-match-its-configuration
     freetype_load_target = "Normal", ---@type "Normal"|"Light"|"Mono"|"HorizontalLcd"
