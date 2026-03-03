@@ -17,16 +17,18 @@ end
 local keys = {
     -- misc/useful --
     -- { key = "F1", mods = "NONE", action = "ActivateCopyMode" },
-    { key = "F2", mods = "NONE", action = act.ActivateCommandPalette },
-    { key = "F3", mods = "NONE", action = act.ShowLauncher },
-    { key = "F4", mods = "NONE", action = act.ShowLauncherArgs({ flags = "FUZZY|TABS" }) },
+    -- { key = "F2", mods = "NONE", action = act.ActivateCommandPalette },
+    { key = "F1", mods = "CTRL", action = "ActivateCopyMode" },
+    { key = "p", mods = "CTRL", action = act.ActivateCommandPalette },
+    { key = "F3", mods = "CTRL", action = act.ShowLauncher },
+    { key = "F4", mods = "CTRL", action = act.ShowLauncherArgs({ flags = "FUZZY|TABS" }) },
     {
         key = "F5",
-        mods = "NONE",
+        mods = "CTRL",
         action = act.ShowLauncherArgs({ flags = "FUZZY|WORKSPACES" }),
     },
-    { key = "F11", mods = "NONE",    action = act.ToggleFullScreen },
-    { key = "F12", mods = "NONE",    action = act.ShowDebugOverlay },
+    { key = "F11", mods = "CTRL",    action = act.ToggleFullScreen },
+    { key = "F12", mods = "CTRL",    action = act.ShowDebugOverlay },
     { key = "f",   mods = mod.SUPER, action = act.Search({ CaseInSensitiveString = "" }) },
     {
         key = "u",
@@ -49,12 +51,15 @@ local keys = {
     },
 
     -- cursor movement --
-    { key = "LeftArrow",  mods = mod.SUPER,     action = act.SendString "\x1bOH" },
-    { key = "RightArrow", mods = mod.SUPER,     action = act.SendString "\x1bOF" },
-    { key = "Backspace",  mods = mod.SUPER,     action = act.SendString "\x15" },
+    ---- copy the cursor selected
+    { key = 'LeftArrow',  mods = mod.SUPER,     action = act.SendString '\u{1b}OH' },
+    { key = 'RightArrow', mods = mod.SUPER,     action = act.SendString '\u{1b}OF' },
+    { key = 'Backspace',  mods = mod.SUPER,     action = act.SendString '\u{15}' },
 
     -- copy/paste --
-    -- { key = "c",          mods = "CTRL|SHIFT",  action = act.CopyTo("Clipboard") },
+    { key = "c",          mods = "CTRL|SHIFT",  action = act.CopyTo("Clipboard") },
+    { key = "Insert",     mods = "CTRL",        action = act.CopyTo("Clipboard") },
+    { key = 'v',          mods = 'CTRL|SHIFT',  action = act.PasteFrom('Clipboard') },
     { key = "Insert",     mods = "SHIFT",       action = act.PasteFrom("Clipboard") },
 
     -- tabs --
@@ -185,10 +190,6 @@ local mouse_bindings = {
         event = { Up = { streak = 1, button = "Left" } },
         mods = "CTRL",
         action = act.OpenLinkAtMouseCursor,
-    },
-    {
-        event = { Up = { streak = 1, button = "Left" } },
-        action = act.CopyTo("Clipboard"),
     },
     {
         event = { Up = { streak = 1, button = "Right" } },
