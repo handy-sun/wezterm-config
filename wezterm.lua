@@ -21,6 +21,5 @@ if has_cus then
     wezterm.log_warn("cus_tab: ", cus_tab)
     return opt:append(cus_tab).options
 else
-    wezterm.log_warn("no custom.lua")
     return opt.options
 end
