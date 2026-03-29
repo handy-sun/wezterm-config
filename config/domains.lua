@@ -10,6 +10,11 @@ if platform.is_win then
                 default_cwd = "~",
                 default_prog = { "zsh", "-l" },
             },
+            {
+                name = "WSL:NixOS",
+                distribution = "nixos",
+                default_cwd = "~",
+            },
         },
     }
 else
