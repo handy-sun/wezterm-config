@@ -3,5 +3,4 @@
 /lua_modules
 /.luarocks
 .DS_Store
-custom.lua
 .vscode/
