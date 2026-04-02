@@ -1,12 +1,12 @@
 # qimocha
 [colors]
-foreground = "#e8ecf4"
+foreground = "#d8dfda"
 background = "#1f1f28"
 cursor_bg = "#f5e0dc"
 cursor_border = "#f5e0dc"
 cursor_fg = "#11111b"
 selection_bg = "#585b70"
-selection_fg = "#e8ecf4"
+selection_fg = "#d8dfda"
 
 ansi = [
     "#1E1E1E",
@@ -16,7 +16,7 @@ ansi = [
     "#6699CC",
     "#C695C6",
     "#5FB4B4",
-    "#F7F7F7",
+    "#F0F1F0",
 ]
 brights = [
     "#B4B4A6",
@@ -26,5 +26,5 @@ brights = [
     "#85ADD6",
     "#D8B6D8",
     "#82C4C4",
-    "#FAFAFA",
+    "#E1E9E4",
 ]
