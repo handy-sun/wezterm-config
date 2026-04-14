@@ -19,7 +19,7 @@ local keys = {
     -- { key = "F1", mods = "NONE", action = "ActivateCopyMode" },
     -- { key = "F2", mods = "NONE", action = act.ActivateCommandPalette },
     { key = "F1", mods = "CTRL", action = "ActivateCopyMode" },
-    { key = "p", mods = "CTRL", action = act.ActivateCommandPalette },
+    { key = "F2", mods = "CTRL", action = act.ActivateCommandPalette },
     { key = "F3", mods = "CTRL", action = act.ShowLauncher },
     { key = "F4", mods = "CTRL", action = act.ShowLauncherArgs({ flags = "FUZZY|TABS" }) },
     {
@@ -29,7 +29,7 @@ local keys = {
     },
     { key = "F11", mods = "CTRL",    action = act.ToggleFullScreen },
     { key = "F12", mods = "CTRL",    action = act.ShowDebugOverlay },
-    { key = "f",   mods = mod.SUPER, action = act.Search({ CaseInSensitiveString = "" }) },
+    { key = "F10",   mods = mod.SUPER, action = act.Search({ CaseInSensitiveString = "" }) },
     {
         key = "u",
         mods = mod.SUPER,
