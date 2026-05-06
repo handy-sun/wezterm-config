@@ -5,10 +5,9 @@ return {
     font_size = platform().is_mac and 16 or 12,
     font = wezterm.font_with_fallback({
         "NotoMono NFM",
-        {
-            family = 'Maple Mono NF',
-            weight = 'Medium',
-        },
+        "FiraCode Nerd Font Mono",
+        "JetBrains Mono",
+        "DejaVu Sans Mono",
         "Droid Sans Mono",
         "Consolas",
     }),
