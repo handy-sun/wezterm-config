@@ -5,14 +5,13 @@ if platform.is_win then
         unix_domains = {},
         wsl_domains = {
             {
-                name = "WSL:Ubuntu-20.04",
-                distribution = "Ubuntu-20.04",
-                default_cwd = "~",
-                default_prog = { "zsh", "-l" },
-            },
-            {
                 name = "WSL:NixOS",
                 distribution = "nixos",
+                default_cwd = "~",
+            },
+            {
+                name = "WSL:ArchLinux",
+                distribution = "arch",
                 default_cwd = "~",
             },
         },
