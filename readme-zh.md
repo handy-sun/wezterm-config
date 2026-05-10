@@ -14,8 +14,7 @@ config/
   launch.lua             ← default_prog + launch_menu（按平台）
   domains.lua            ← unix/wsl domains
 colors/
-  custom.lua             ← Catppuccin Mocha 变体颜色方案（完整定义）
-  qimocha.toml           ← TOML 颜色方案文件
+  qimocha.toml           ← qimocha 颜色方案文件
 events/
   tab-title.lua          ← format-tab-title 事件处理器
   right-status.lua       ← update-right-status（日期+电量）
@@ -192,40 +191,25 @@ macOS/Linux: `unix_domains = {}`（空）
 
 Windows: WSL domains（Ubuntu-20.04, NixOS）
 
-### 7. 颜色方案（colors/custom.lua + qimocha.toml）
+### 7. 颜色方案（qimocha.toml）
 
 **qimocha** — Catppuccin Mocha 变体：
 
 基础色：
-- `foreground = "#e8ecf4"` (text)
+- `foreground = "#d8dfda"`
 - `background = "#1f1f28"` (base)
 - `cursor_bg = "#f5e0dc"` (rosewater)
 - `cursor_border = "#f5e0dc"` (rosewater)
 - `cursor_fg = "#11111b"` (crust)
 - `selection_bg = "#585b70"` (surface2)
-- `selection_fg = "#e8ecf4"` (text)
+- `selection_fg = "#d8dfda"`
 
-ANSI: `#1E1E1E` `#EC5F66` `#99C794` `#F9AE58` `#6699CC` `#C695C6` `#5FB4B4` `#F7F7F7`
+ANSI: `#1E1E1E` `#EC5F66` `#99C794` `#F9AE58` `#6699CC` `#C695C6` `#5FB4B4` `#F0F1F0`
 
-Brights: `#B4B4A6` `#F97B58` `#ACD1A8` `#FAC761` `#85ADD6` `#D8B6D8` `#82C4C4` `#FAFAFA`
+Brights: `#B4B4A6` `#F97B58` `#ACD1A8` `#FAC761` `#85ADD6` `#D8B6D8` `#82C4C4` `#E1E9E4`
 
-Tab bar：
-- `background = "rgba(0, 0, 0, 0.4)"`
-- active_tab: bg=`#585b70`, fg=`#e8ecf4`
-- inactive_tab: bg=`#313244`, fg=`#bac2de`
-- inactive_tab_hover: bg=`#313244`, fg=`#e8ecf4`
-- new_tab: bg=`#1f1f28`, fg=`#e8ecf4`
-- new_tab_hover: bg=`#181825`, fg=`#e8ecf4`, italic=`true`
-
-其他：
-- `visual_bell = "#313244"`
-- `indexed[16] = "#fab387"` (peach)
-- `indexed[17] = "#f5e0dc"` (rosewater)
-- `scrollbar_thumb = "#585b70"`
-- `split = "#6c7086"`
-- `compose_cursor = "#f2cdcd"`
-
-**注意**：TOML 文件 (qimocha.toml) 的 foreground 为 `#d8dfda`，white ANSI/bright 值也略有不同，与 Lua 版本存在细微差异。
+背景遮罩：
+- `appearance.lua` 和 `backdrops.lua` 使用 `#1f1f28` 作为背景图片遮罩色
 
 ### 8. 事件处理器
 
@@ -332,7 +316,7 @@ return config
 
 | 原始配置 | Nix 目标 | 说明 |
 |---|---|---|
-| 颜色方案 (custom.lua) | `colorSchemes.qimocha` | TOML 格式 |
+| 颜色方案 (`qimocha.toml`) | `colorSchemes.qimocha` | TOML 格式 |
 | 字体变量 | Nix `let` 变量 | `fontFamily`, `fontSize` |
 | 声明式设置 | `settings` | 通过 toLua 序列化 |
 | 事件处理器 | `extraConfig` | 需要 `wezterm.GLOBAL`、回调、nerdfonts |
@@ -355,4 +339,4 @@ return config
 - `settings` 中的动作值（如 `SpawnTab`、`ShowLauncherArgs`）需要 `mkLuaInline` 保持为原始 Lua 表达式
 - `extraConfig` 的返回表会**浅合并**到 settings 之上（同名 key 整体替换，不递归合并）
 - `colorSchemes` 的 TOML 结构外层需要 `colors` 包裹键
-- 原始 `qimocha.toml` 的 foreground (`#d8dfda`) 与 Lua 版本 (`#e8ecf4`) 有细微差异，以 Lua 版本为准
+- `qimocha.toml` 是当前 Lua 配置使用的颜色方案来源

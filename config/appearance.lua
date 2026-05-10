@@ -1,6 +1,6 @@
 local wezterm = require("wezterm")
 -- local gpu_adapters = require("utils.gpu_adapter")
-local custom = require("colors.custom")
+local BACKDROP_OVERLAY = "#1f1f28"
 local platform = require("utils.platform")()
 
 local window_frame = {
@@ -38,7 +38,7 @@ return {
             horizontal_align = "Center",
         },
         {
-            source = { Color = custom.background },
+            source = { Color = BACKDROP_OVERLAY },
             height = "100%",
             width = "100%",
             opacity = 0.96,
