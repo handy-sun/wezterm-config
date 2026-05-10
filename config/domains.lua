@@ -6,7 +6,7 @@ if platform.is_win then
         wsl_domains = {
             {
                 name = "WSL:NixOS",
-                distribution = "nixos",
+                distribution = "nixwsl",
                 default_cwd = "~",
             },
             {

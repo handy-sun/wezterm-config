@@ -104,6 +104,7 @@ backdrops/
 | `window_close_confirmation` | `"NeverPrompt"` |
 | `window_frame.active_titlebar_bg` | `"#0F2536"` |
 | `window_frame.inactive_titlebar_bg` | `"#0F2536"` |
+| `window_frame.font_size` | Windows: `12.0`，其他平台不设置 |
 | `inactive_pane_hsb.saturation` | `0.9` |
 | `inactive_pane_hsb.brightness` | `0.65` |
 
