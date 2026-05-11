@@ -9,7 +9,6 @@ config/
   init.lua               ← Config 类（builder 模式，Config:append 合并）
   general.lua            ← 通用行为 + hyperlink rules
   appearance.lua         ← 外观/窗口/光标/tab bar 配置
-  fonts.lua              ← 字体设置
   bindings.lua           ← 所有按键/鼠标绑定、key tables、leader 键
   launch.lua             ← default_prog + launch_menu（按平台）
   domains.lua            ← unix/wsl domains
@@ -35,12 +34,12 @@ backdrops/
 
 ## 配置项详情
 
-### 1. 字体（fonts.lua）
+### 1. 字体（Home Manager settings）
 
 | 设置 | 值 |
 |---|---|
 | `font_size` | macOS: `16`，其他: `12` |
-| `font` | `wezterm.font_with_fallback({"NotoMono NFM", {family="Maple Mono NF", weight="Medium"}, "Droid Sans Mono", "Consolas"})` |
+| `font` | `wezterm.font_with_fallback({"NotoMono NFM", "FiraCode Nerd Font Mono", "JetBrains Mono", "DejaVu Sans Mono", "Droid Sans Mono", "Consolas"})` |
 | `freetype_load_target` | `"Normal"` |
 | `freetype_render_target` | `"Normal"` |
 
@@ -72,7 +71,6 @@ backdrops/
 | `max_fps` | `120` |
 | `front_end` | `"WebGpu"` |
 | `webgpu_power_preference` | `"HighPerformance"` |
-| `color_scheme` | `"qimocha"` |
 | `window_background_opacity` | `1.0` |
 | `win32_system_backdrop` | `"Acrylic"` |
 | `window_background_gradient.colors` | `{"#1D261B", "#261A25"}` |
@@ -293,7 +291,7 @@ Tab 标题颜色：
 | `enableBashIntegration` | bool | Bash 集成 |
 | `enableZshIntegration` | bool | Zsh 集成 |
 | `settings` | attrsOf anything | 声明式配置，通过 `toLua` 序列化 |
-| `extraConfig` | lines | 原始 Lua 代码，返回表会合并到 settings 之上 |
+| `extraConfig` | lines | 原始 Lua 代码，用于加载现有 Lua 模块并写入 `config` |
 | `colorSchemes` | attrsOf TOML | 颜色方案，写入 `colors/<name>.toml` |
 
 ### 生成的 wezterm.lua 结构
@@ -303,12 +301,7 @@ local wezterm = require 'wezterm'
 local config = wezterm.config_builder and wezterm.config_builder() or {}
 local hm_config = <toLua(settings)>
 for k, v in pairs(hm_config) do config[k] = v end
-local _hm_extra = (function()
-  <extraConfig>
-end)()
-if type(_hm_extra) == "table" then
-  for k, v in pairs(_hm_extra) do config[k] = v end
-end
+<extraConfig>
 return config
 ```
 
@@ -336,7 +329,7 @@ return config
 
 ### 关键注意事项
 
-- `settings` 中的动作值（如 `SpawnTab`、`ShowLauncherArgs`）需要 `mkLuaInline` 保持为原始 Lua 表达式
-- `extraConfig` 的返回表会**浅合并**到 settings 之上（同名 key 整体替换，不递归合并）
+- `settings` 中的字体值需要 `mkLuaInline` 保持为原始 Lua 表达式
+- `extraConfig` 不返回表，而是直接把现有 Lua 模块产出的配置写入 `config`
 - `colorSchemes` 的 TOML 结构外层需要 `colors` 包裹键
-- `qimocha.toml` 是当前 Lua 配置使用的颜色方案来源
+- `qimocha.toml` 是当前 Home Manager 配置使用的颜色方案来源

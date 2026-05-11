@@ -1,5 +1,6 @@
 local Config = require("config")
 local wezterm = require("wezterm")
+
 require("utils.backdrops"):set_files():random()
 
 require("events.right-status").setup()
@@ -18,7 +19,11 @@ local has_cus, cus_fun = pcall(require, "custom")
 if has_cus then
     local cus_tab = cus_fun()
     wezterm.log_warn("cus_tab: ", cus_tab)
-    return opt:append(cus_tab).options
-else
-    return opt.options
+    opt:append(cus_tab)
+end
+
+-- Home Manager appends this file after defining the generated `config` table.
+for k, v in pairs(opt.options) do
+    ---@diagnostic disable-next-line: undefined-global
+    config[k] = v
 end
