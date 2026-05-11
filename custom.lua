@@ -25,7 +25,7 @@ return function ()
     elseif platform.is_mac or platform.is_linux then
         local function command_path(cmd)
             local success, stdout, _ =
-                wezterm.run_child_process({ "command", "-v", cmd })
+                wezterm.run_child_process({ "sh", "-c", "command -v " .. cmd })
             if success and stdout and stdout ~= "" then
                 return stdout:gsub("%s+$", "")
             end
