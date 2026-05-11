@@ -72,8 +72,8 @@ return {
     -- integrated_title_button_style = "Windows",
     integrated_title_button_color = "auto",
     -- integrated_title_button_alignment = "Right",
-    -- initial_cols = 180,
-    -- initial_rows = 45,
+    initial_cols = 200,
+    initial_rows = 55,
     window_padding = {
         left = 10,
         right = 10,
