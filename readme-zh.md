@@ -19,7 +19,6 @@ events/
   right-status.lua       ← update-right-status（日期+电量）
   left-status.lua        ← update-left-status（key table/leader 指示）
   new-tab-button.lua     ← new-tab-button-click 处理
-  maximize.lua           ← gui-startup 最大化窗口
 utils/
   platform.lua           ← 平台检测（从 wezterm.target_triple）
   cells.lua              ← FormatCells 构建器（segment 格式化）
@@ -257,10 +256,6 @@ Tab 标题颜色：
 
 - 左键 → 默认操作（新 tab）
 - 右键 → ShowLauncherArgs（fuzzy 搜索）
-
-#### gui-startup（maximize.lua）
-
-- 启动时创建初始窗口并最大化（非桌面全屏）
 
 ### 9. 工具模块
 
