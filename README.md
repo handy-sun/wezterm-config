@@ -12,8 +12,6 @@
   </a>
 </p>
 
-![screenshot](./.github/screenshots/wezterm.gif)
-
 ---
 
 ### Features
