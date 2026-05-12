@@ -8,7 +8,7 @@ local window_frame = {
     inactive_titlebar_bg = "#0F2536"
 }
 
-if platform.is_win then
+if platform.is_win or platform.is_mac then
     -- Fancy tab bar height follows the window frame font size on Windows.
     window_frame.font_size = 12.0
 end
