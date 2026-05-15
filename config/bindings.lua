@@ -76,7 +76,7 @@ local keys = {
 
     -- window --
     -- spawn windows
-    { key = "n",          mods = mod.SUPER,     action = act.SpawnWindow },
+    -- { key = "n",          mods = mod.SUPER,     action = act.SpawnWindow },
 
     -- background controls --
     {
