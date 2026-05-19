@@ -15,10 +15,10 @@ if platform.is_win then
         },
     }
 elseif platform.is_mac or platform.is_linux then
-    options.default_prog = { "/run/current-system/sw/bin/fish", "-il" }
+    options.default_prog = { "fish", "-il" }
     options.launch_menu = {
-        { label = "Fish", args = { "/run/current-system/sw/bin/fish", "-il" } },
-        { label = "Fish(Private)", args = { "/run/current-system/sw/bin/fish", "-il", "-P" } },
+        { label = "Fish", args = { "fish", "-il" } },
+        { label = "Fish(Private)", args = { "fish", "-il", "-P" } },
         { label = "Zsh", args = { "zsh", "-il" } },
         { label = "Bash", args = { "bash", "-l" } },
     }
