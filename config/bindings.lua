@@ -52,8 +52,8 @@ local keys = {
 
     -- cursor movement --
     ---- copy the cursor selected
-    { key = 'LeftArrow',  mods = mod.SUPER,     action = act.SendString '\u{1b}OH' },
-    { key = 'RightArrow', mods = mod.SUPER,     action = act.SendString '\u{1b}OF' },
+    { key = 'LeftArrow',  mods = "CTRL|SHIFT",     action = act.SendString '\u{1b}OH' },
+    { key = 'RightArrow', mods = "CTRL|SHIFT",     action = act.SendString '\u{1b}OF' },
     { key = 'Backspace',  mods = mod.SUPER,     action = act.SendString '\u{15}' },
 
     -- copy/paste --
@@ -76,7 +76,7 @@ local keys = {
 
     -- window --
     -- spawn windows
-    { key = "n",          mods = mod.SUPER,     action = act.SpawnWindow },
+    -- { key = "n",          mods = mod.SUPER,     action = act.SpawnWindow },
 
     -- background controls --
     {

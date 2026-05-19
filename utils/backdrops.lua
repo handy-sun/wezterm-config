@@ -1,6 +1,5 @@
 local wezterm = require("wezterm")
 local platform = require("utils.platform")()
-local colors = require("colors.custom")
 
 -- Seeding random numbers before generating for use
 -- Known issue with lua math library
@@ -11,6 +10,7 @@ math.random()
 math.random()
 
 local PATH_SEP = platform.is_win and "\\" or "/"
+local BACKDROP_OVERLAY = "#1f1f28"
 
 ---@class BackDrops
 ---@field current_idx number index of current image
@@ -55,7 +55,7 @@ function BackDrops:_set_opt(window)
                 horizontal_align = "Center",
             },
             {
-                source = { Color = colors.background },
+                source = { Color = BACKDROP_OVERLAY },
                 height = "100%",
                 width = "100%",
                 opacity = 0.96,

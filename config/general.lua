@@ -5,7 +5,7 @@ return {
     exit_behavior = "CloseOnCleanExit", -- if the shell program exited with a successful status
     status_update_interval = 1000,
 
-    scrollback_lines = 5000,
+    scrollback_lines = 15000,
 
     -- paste behaviours
     canonicalize_pasted_newlines = "CarriageReturn",

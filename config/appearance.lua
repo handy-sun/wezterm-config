@@ -1,6 +1,17 @@
 local wezterm = require("wezterm")
 -- local gpu_adapters = require("utils.gpu_adapter")
-local custom = require("colors.custom")
+local BACKDROP_OVERLAY = "#1f1f28"
+local platform = require("utils.platform")()
+
+local window_frame = {
+    active_titlebar_bg = "#0F2536",
+    inactive_titlebar_bg = "#0F2536"
+}
+
+if platform.is_win or platform.is_mac then
+    -- Fancy tab bar height follows the window frame font size on Windows.
+    window_frame.font_size = 12.0
+end
 
 return {
     term = "xterm-256color",
@@ -27,7 +38,7 @@ return {
             horizontal_align = "Center",
         },
         {
-            source = { Color = custom.background },
+            source = { Color = BACKDROP_OVERLAY },
             height = "100%",
             width = "100%",
             opacity = 0.96,
@@ -57,25 +68,20 @@ return {
 
     -- window
     adjust_window_size_when_changing_font_size = false,
-    window_decorations = "INTEGRATED_BUTTONS|RESIZE",
-    integrated_title_button_style = "Windows",
+    window_decorations = "INTEGRATED_BUTTONS | RESIZE",
+    -- integrated_title_button_style = "Windows",
     integrated_title_button_color = "auto",
-    integrated_title_button_alignment = "Right",
-    initial_cols = 180,
-    initial_rows = 45,
+    -- integrated_title_button_alignment = "Right",
+    initial_cols = 200,
+    initial_rows = 55,
     window_padding = {
-        left = 5,
+        left = 10,
         right = 10,
-        top = 12,
+        top = 5,
         bottom = 7,
     },
     window_close_confirmation = "NeverPrompt",
-    window_frame = {
-        active_titlebar_bg = "#0F2536",
-        inactive_titlebar_bg = "#0F2536",
-        -- font = fonts.font,
-        -- font_size = fonts.font_size,
-    },
+    window_frame = window_frame,
     inactive_pane_hsb = {
         saturation = 0.9,
         brightness = 0.65,

@@ -5,14 +5,13 @@ if platform.is_win then
         unix_domains = {},
         wsl_domains = {
             {
-                name = "WSL:Ubuntu-20.04",
-                distribution = "Ubuntu-20.04",
+                name = "WSL:NixOS",
+                distribution = "nixos", --- 这个值是 wsl.exe -l -v 输出的 distribution 名称
                 default_cwd = "~",
-                default_prog = { "zsh", "-l" },
             },
             {
-                name = "WSL:NixOS",
-                distribution = "nixos",
+                name = "WSL:ArchLinux",
+                distribution = "arch",
                 default_cwd = "~",
             },
         },
