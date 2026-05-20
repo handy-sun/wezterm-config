@@ -1,11 +1,13 @@
+---@type Config
 return {
-    -- behaviours
-    automatically_reload_config = true,
-    check_for_updates = false,
-    exit_behavior = "CloseOnCleanExit", -- if the shell program exited with a successful status
-    status_update_interval = 1000,
+   -- behaviours
+   automatically_reload_config = true,
+   exit_behavior = 'CloseOnCleanExit', -- if the shell program exited with a successful status
+   exit_behavior_messaging = 'Verbose',
+   status_update_interval = 1000,
+   audible_bell = 'Disabled',
 
-    scrollback_lines = 15000,
+   scrollback_lines = 20000,
 
     -- paste behaviours
     canonicalize_pasted_newlines = "CarriageReturn",
