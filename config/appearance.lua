@@ -14,7 +14,6 @@ if platform.is_win or platform.is_mac then
 end
 local gpu_adapters = require('utils.gpu-adapter')
 local backdrops = require('utils.backdrops')
-local colors = require('colors.custom')
 
 ---@type Config
 return {

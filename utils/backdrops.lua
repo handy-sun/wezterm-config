@@ -1,6 +1,5 @@
 local wezterm = require("wezterm")
 local platform = require("utils.platform")
-local colors = require('colors.custom')
 
 -- Seeding random numbers before generating for use
 -- Known issue with lua math library
@@ -13,6 +12,10 @@ math.random()
 local PATH_SEP = platform.is_win and "\\" or "/"
 local BACKDROP_OVERLAY = "#1f1f28"
 local GLOB_PATTERN = '*.{jpg,jpeg,png,gif,bmp,ico,tiff,pnm,dds,tga}'
+
+local colors = {
+   background = BACKDROP_OVERLAY,
+}
 
 ---@class BackDrops
 ---@field current_idx number index of current image
@@ -28,7 +31,7 @@ function BackDrops:init()
    local backdrops = {
       current_idx = 1,
       images = {},
-      images_dir = wezterm.config_dir .. '/backdrops/',
+      images_dir = wezterm.config_dir .. PATH_SEP .. 'backdrops',
       no_bg = false,
    }
    return setmetatable(backdrops, self)
@@ -43,8 +46,8 @@ end
 ---@param path string directory of background images
 function BackDrops:set_images_dir(path)
    self.images_dir = path
-   if not path:match('/$') then
-      self.images_dir = path .. '/'
+   if not path:match(PATH_SEP .. '$') then
+      self.images_dir = path .. PATH_SEP
    end
    return self
 end

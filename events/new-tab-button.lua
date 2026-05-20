@@ -47,7 +47,7 @@ local function build_choices()
    end
 
    -- Add WSL domains
-   for _, v in ipairs(domains.wsl_domains) do
+   for _, v in ipairs(domains.wsl_domains or {}) do
       cells:update_segment_text('label_text', v.name)
 
       table.insert(choices, {
@@ -61,7 +61,7 @@ local function build_choices()
    end
 
    -- Add SSH domains
-   for _, v in ipairs(domains.ssh_domains) do
+   for _, v in ipairs(domains.ssh_domains or {}) do
       cells:update_segment_text('label_text', v.name)
       table.insert(choices, {
          id = tostring(idx),
@@ -74,7 +74,7 @@ local function build_choices()
    end
 
    -- Add Unix domains
-   for _, v in ipairs(domains.unix_domains) do
+   for _, v in ipairs(domains.unix_domains or {}) do
       cells:update_segment_text('label_text', v.name)
       table.insert(choices, {
          id = tostring(idx),
