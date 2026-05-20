@@ -20,7 +20,11 @@ require('events.tab-title').setup({
    unseen_icon = 'numbered_box',
    show_progress = true,
 })
-require('events.new-tab-button').setup()
+require('events.new-tab-button').setup({
+   ---@diagnostic disable-next-line: undefined-global
+   launch_menu = type(config) == 'table' and config.launch_menu or opt.options.launch_menu,
+   domains = opt.options,
+})
 require('events.gui-startup').setup()
 
 -- Home Manager appends this file after defining the generated `config` table.

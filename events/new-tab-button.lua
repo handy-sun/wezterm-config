@@ -1,6 +1,6 @@
 local wezterm = require('wezterm')
-local launch_menu = require('config.launch').launch_menu
-local domains = require('config.domains')
+local default_launch_menu = require('config.launch').launch_menu or {}
+local default_domains = require('config.domains') or {}
 local Cells = require('utils.cells')
 
 local nf = wezterm.nerdfonts
@@ -26,7 +26,12 @@ local cells = Cells:new()
    :add_segment('icon_unix', ' ' .. nf.dev_gnu .. ' ', colors.icon_unix)
    :add_segment('label_text', '', colors.label_text, attr(attr.intensity('Bold')))
 
-local function build_choices()
+---@param opts? {launch_menu?: table[], domains?: table}
+local function build_choices(opts)
+   opts = opts or {}
+
+   local launch_menu = opts.launch_menu or default_launch_menu
+   local domains = opts.domains or default_domains
    local choices = {}
    local choices_data = {}
    local idx = 1
@@ -89,9 +94,10 @@ local function build_choices()
    return choices, choices_data
 end
 
-local choices, choices_data = build_choices()
+---@param opts? {launch_menu?: table[], domains?: table}
+M.setup = function(opts)
+   local choices, choices_data = build_choices(opts)
 
-M.setup = function()
    wezterm.on('new-tab-button-click', function(window, pane, button, default_action)
       if default_action and button == 'Left' then
          window:perform_action(default_action, pane)
