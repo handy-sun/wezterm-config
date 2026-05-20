@@ -7,10 +7,15 @@ local window_frame = {
     active_titlebar_bg = "#0F2536",
     inactive_titlebar_bg = "#0F2536"
 }
+local window_decorations = nil
 
 if platform.is_win or platform.is_mac then
     -- Fancy tab bar height follows the window frame font size on Windows.
     window_frame.font_size = 12.0
+end
+
+if not platform.is_linux then
+    window_decorations = "INTEGRATED_BUTTONS|RESIZE"
 end
 local gpu_adapters = require('utils.gpu-adapter')
 local backdrops = require('utils.backdrops')
@@ -68,6 +73,7 @@ return {
    },
    adjust_window_size_when_changing_font_size = false,
    window_close_confirmation = 'NeverPrompt',
+   window_decorations = window_decorations,
    window_frame = {
       active_titlebar_bg = '#090909',
       -- font = fonts.font,
