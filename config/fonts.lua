@@ -1,8 +1,9 @@
 local platform = require("utils.platform")
 local wezterm = require("wezterm")
 
+---@type Config
 return {
-    font_size = platform().is_mac and 16 or 12,
+    font_size = platform.is_mac and 16 or 12,
     font = wezterm.font_with_fallback({
         "NotoMono NFM",
         "FiraCode Nerd Font Mono",

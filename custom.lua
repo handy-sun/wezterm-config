@@ -1,4 +1,4 @@
-local platform = require("utils.platform")()
+local platform = require("utils.platform")
 local wezterm = require("wezterm")
 
 return function ()
@@ -76,4 +76,3 @@ return function ()
         }
     end
 end
-
