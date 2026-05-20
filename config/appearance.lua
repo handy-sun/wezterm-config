@@ -1,7 +1,7 @@
 local wezterm = require("wezterm")
 -- local gpu_adapters = require("utils.gpu_adapter")
 local BACKDROP_OVERLAY = "#1f1f28"
-local platform = require("utils.platform")()
+local platform = require("utils.platform")
 
 local window_frame = {
     active_titlebar_bg = "#0F2536",

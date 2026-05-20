@@ -1,4 +1,4 @@
-local platform = require("utils.platform")()
+local platform = require("utils.platform")
 
 if platform.is_win then
     return {
