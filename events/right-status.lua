@@ -1,51 +1,77 @@
-local wezterm = require("wezterm")
-local math = require("utils.math")
+local wezterm = require('wezterm')
+local umath = require('utils.math')
+local Cells = require('utils.cells')
+local OptsValidator = require('utils.opts-validator')
+
+local nf = wezterm.nerdfonts
+local attr = Cells.attr
+
+---@alias Event.RightStatusOptionsInput { date_format?: string }
+
+---@alias Event.RightStatusOptions { date_format: string }
+
+---Setup options for the right status bar
+---@type OptsValidator
+local EVENT_OPTS = OptsValidator:new({
+   {
+      name = 'date_format',
+      type = 'string',
+      default = '%a %H:%M:%S',
+   },
+})
+
 local M = {}
 
-M.separator_char = " ~ "
+local ICON_SEPARATOR = nf.oct_dash
+local ICON_DATE = nf.fa_calendar
 
-M.colors = {
-    date_fg = "#7F82BB",
-    date_bg = "#0F2536",
-    battery_fg = "#BB49B3",
-    battery_bg = "#0F2536",
-    separator_fg = "#786D22",
-    separator_bg = "#0F2536",
+---@type string[]
+local discharging_icons = {
+   nf.md_battery_10,
+   nf.md_battery_20,
+   nf.md_battery_30,
+   nf.md_battery_40,
+   nf.md_battery_50,
+   nf.md_battery_60,
+   nf.md_battery_70,
+   nf.md_battery_80,
+   nf.md_battery_90,
+   nf.md_battery,
+}
+---@type string[]
+local charging_icons = {
+   nf.md_battery_charging_10,
+   nf.md_battery_charging_20,
+   nf.md_battery_charging_30,
+   nf.md_battery_charging_40,
+   nf.md_battery_charging_50,
+   nf.md_battery_charging_60,
+   nf.md_battery_charging_70,
+   nf.md_battery_charging_80,
+   nf.md_battery_charging_90,
+   nf.md_battery_charging,
 }
 
-M.cells = {} -- wezterm FormatItems (ref: https://wezfurlong.org/wezterm/config/lua/wezterm/format.html)
+---@type table<string, Cells.SegmentColors>
+-- stylua: ignore
+local colors = {
+   date      = { fg = '#fab387', bg = 'rgba(0, 0, 0, 0.4)' },
+   battery   = { fg = '#f9e2af', bg = 'rgba(0, 0, 0, 0.4)' },
+   separator = { fg = '#74c7ec', bg = 'rgba(0, 0, 0, 0.4)' }
+}
 
----@param text string
----@param icon string
----@param fg string
----@param bg string
----@param separate boolean
-M.push = function(text, icon, fg, bg, separate)
-    table.insert(M.cells, { Foreground = { Color = fg } })
-    table.insert(M.cells, { Background = { Color = bg } })
-    table.insert(M.cells, { Attribute = { Intensity = "Bold" } })
-    table.insert(M.cells, { Text = icon .. " " .. text .. " " })
+local cells = Cells:new()
 
-    if separate then
-        table.insert(M.cells, { Foreground = { Color = M.colors.separator_fg } })
-        table.insert(M.cells, { Background = { Color = M.colors.separator_bg } })
-        table.insert(M.cells, { Text = M.separator_char })
-    end
+cells
+   :add_segment('date_icon', ICON_DATE .. '  ', colors.date, attr(attr.intensity('Bold')))
+   :add_segment('date_text', '', colors.date, attr(attr.intensity('Bold')))
+   :add_segment('separator', ' ' .. ICON_SEPARATOR .. '  ', colors.separator)
+   :add_segment('battery_icon', '', colors.battery)
+   :add_segment('battery_text', '', colors.battery, attr(attr.intensity('Bold')))
 
-    table.insert(M.cells, "ResetAttributes")
-end
-
-M.set_date = function()
-    local date = wezterm.strftime(" %a %H:%M")
-    M.push(date, "", M.colors.date_fg, M.colors.date_bg, true)
-end
-
-M.set_battery = function()
-    -- ref: https://wezfurlong.org/wezterm/config/lua/wezterm/battery_info.html
-    local discharging_icons =
-        { "󰂃", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹" }
-    local charging_icons =
-        { "󰢜", "󰂆", "󰂇", "󰂈", "󰢝", "󰂉", "󰢞", "󰂊", "󰂋", "󰂅" }
+---@return string, string
+local function battery_info()
+   -- ref: https://wezfurlong.org/wezterm/config/lua/wezterm/battery_info.html
 
     local charge = ""
     local icon = ""
@@ -61,17 +87,33 @@ M.set_battery = function()
         end
     end
 
-    M.push(charge, icon, M.colors.battery_fg, M.colors.battery_bg, false)
+   return charge, icon .. ' '
 end
 
-M.setup = function()
-    wezterm.on("update-right-status", function(window, _pane)
-        M.cells = {}
-        M.set_date()
-        M.set_battery()
+---@param opts? Event.RightStatusOptionsInput Default: {date_format = '%a %H:%M:%S'}
+M.setup = function(opts)
+   local valid_opts, err = EVENT_OPTS:validate(opts or {})
 
-        window:set_right_status(wezterm.format(M.cells))
-    end)
+   if err then
+      wezterm.log_error(err)
+   end
+
+   ---@cast valid_opts Event.RightStatusOptions
+
+   wezterm.on('update-status', function(window, _pane)
+      local battery_text, battery_icon = battery_info()
+
+      cells
+         :update_segment_text('date_text', wezterm.strftime(valid_opts.date_format))
+         :update_segment_text('battery_icon', battery_icon)
+         :update_segment_text('battery_text', battery_text)
+
+      window:set_right_status(
+         wezterm.format(
+            cells:render({ 'date_icon', 'date_text', 'separator', 'battery_icon', 'battery_text' })
+         )
+      )
+   end)
 end
 
 return M
