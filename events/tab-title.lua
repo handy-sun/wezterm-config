@@ -67,14 +67,14 @@ local ICON_PREFIX = {
    wsl      = nf.cod_terminal_linux,  --[[  ]]
    debug    = nf.fa_bug,              --[[  ]]
    select   = nf.md_selection_search, --[[ 󱈅 ]]
-   --  search = '🔭',
+   search   = '🔭',
    launcher = nf.oct_rocket,          --[[  ]]
    edit     = nf.fa_edit,             --[[  ]]
 }
 
 ---@enum UnseenOutputIcon
 local ICON_UNSEEN = {
-   cirlce = nf.fa_circle, --[[  ]]
+   circle = nf.fa_circle, --[[  ]]
 
    numbered_box_1 = nf.md_numeric_1_box_multiple, --[[ 󰼏 ]]
    numbered_box_2 = nf.md_numeric_2_box_multiple, --[[ 󰼐 ]]
@@ -255,11 +255,14 @@ end
 local function create_title(process_name, base_title, max_width, inset)
    local title
 
-    if process_name:len() > 0 then
-        title = process_name .. " ~ " .. base_title
-    else
-        title = base_title
-    end
+   if base_title:match("^InputSelector:") ~= nil then
+      title = base_title:gsub("InputSelector:", ICON_PREFIX.search)
+      inset = inset - 2
+   elseif process_name:len() > 0 then
+      title = process_name .. " ~ " .. base_title
+   else
+      title = base_title
+   end
 
    if wezterm.column_width(title) > max_width - inset then
       local diff = wezterm.column_width(title) - max_width + inset
@@ -269,20 +272,7 @@ local function create_title(process_name, base_title, max_width, inset)
       title = title .. string.rep(' ', padding)
    end
 
-    if base_title:match("^InputSelector:") ~= nil then
-        title = base_title:gsub("InputSelector:", GLYPH_SEARCH)
-        inset = inset - 2
-    end
-
-    if title:len() > max_width - inset then
-        local diff = title:len() - max_width + inset
-        title = title:sub(1, title:len() - diff)
-    else
-        local padding = max_width - title:len() - inset
-        title = title .. string.rep(" ", padding)
-    end
-
-    return title
+   return title
 end
 
 local progress_stale = (function()
