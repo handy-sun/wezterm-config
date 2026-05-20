@@ -57,6 +57,20 @@ local M = {}
 local PROGRESS_MIN_VERSION = 20250209
 local PROGRESS_STALE_AFTER = 30 -- seconds
 
+---@param version string
+---@return number|nil
+local function parse_version_date(version)
+   local release_date = version:match('^(%d%d%d%d%d%d%d%d)')
+   if release_date then
+      return tonumber(release_date)
+   end
+
+   local year, month, day = version:match('(%d%d%d%d)%-(%d%d)%-(%d%d)')
+   if year then
+      return tonumber(year .. month .. day)
+   end
+end
+
 local ICON_SCIRCLE_LEFT = nf.ple_left_half_circle_thick --[[  ]]
 local ICON_SCIRCLE_RIGHT = nf.ple_right_half_circle_thick --[[  ]]
 
@@ -549,7 +563,8 @@ M.setup = function(opts)
 
    ---@cast valid_opts Event.TabTitleOptions
 
-   if tonumber(wezterm.version:sub(1, 8)) < PROGRESS_MIN_VERSION then
+   local version_date = parse_version_date(wezterm.version)
+   if version_date == nil or version_date < PROGRESS_MIN_VERSION then
       valid_opts.show_progress = false
    end
 
