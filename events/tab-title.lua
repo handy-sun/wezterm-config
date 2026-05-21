@@ -5,6 +5,7 @@
 local wezterm = require('wezterm')
 local Cells = require('utils.cells')
 local OptsValidator = require('utils.opts-validator')
+local TabTitleWidth = require('utils.tab-title-width')
 local ustr = require('utils.str')
 
 local nf = wezterm.nerdfonts
@@ -19,11 +20,13 @@ local attr = Cells.attr
 ---@field unseen_icon? 'circle' | 'numbered_circle' | 'numbered_box'
 ---@field hide_active_tab_unseen? boolean
 ---@field show_progress? boolean
+---@field min_width? number
 
 ---@class Event.TabTitleOptions
 ---@field unseen_icon 'circle' | 'numbered_circle' | 'numbered_box'
 ---@field hide_active_tab_unseen boolean
 ---@field show_progress boolean
+---@field min_width number
 
 ---Setup options for the tab title
 ---@type OptsValidator
@@ -43,6 +46,11 @@ local EVENT_OPTS = OptsValidator:new({
       name = 'show_progress',
       type = 'boolean',
       default = true,
+   },
+   {
+      name = 'min_width',
+      type = 'number',
+      default = 18,
    },
 })
 
@@ -266,7 +274,8 @@ end
 ---@param base_title string
 ---@param max_width number
 ---@param inset number
-local function create_title(process_name, base_title, max_width, inset)
+---@param min_width number
+local function create_title(process_name, base_title, max_width, inset, min_width)
    local title
 
    if base_title:match("^InputSelector:") ~= nil then
@@ -278,15 +287,14 @@ local function create_title(process_name, base_title, max_width, inset)
       title = base_title
    end
 
-   if wezterm.column_width(title) > max_width - inset then
-      local diff = wezterm.column_width(title) - max_width + inset
-      title = wezterm.truncate_right(title, wezterm.column_width(title) - diff)
-   else
-      local padding = max_width - wezterm.column_width(title) - inset
-      title = title .. string.rep(' ', padding)
-   end
-
-   return title
+   return TabTitleWidth.fit_title({
+      title = title,
+      max_width = max_width,
+      inset = inset,
+      min_width = min_width,
+      column_width = wezterm.column_width,
+      truncate_right = wezterm.truncate_right,
+   })
 end
 
 local progress_stale = (function()
@@ -515,7 +523,7 @@ function Tab:update_cells(event_opts, tab, hover, max_width)
       base_title = self.locked_title
    end
 
-   local title = create_title(process_name, base_title, max_width, inset)
+   local title = create_title(process_name, base_title, max_width, inset, event_opts.min_width)
 
    title_cells:update_segment_text(RS.title, title)
 
@@ -553,7 +561,7 @@ local tab_list = {}
 ---NOTE:
 ---Progress indicator is only available for WezTerm nightly versions `20250209-182623-44866cc1` and onwards.
 ---If an older version is used, the `show_progress` options will be hard-set to `false`.
----@param opts? Event.TabTitleOptionsInput Default: {unseen_icon = 'circle', hide_active_tab_unseen = true, show_progress = true}
+---@param opts? Event.TabTitleOptionsInput Default: {unseen_icon = 'circle', hide_active_tab_unseen = true, show_progress = true, min_width = 18}
 M.setup = function(opts)
    local valid_opts, err = EVENT_OPTS:validate(opts or {})
 

@@ -215,6 +215,8 @@ Brights: `#B4B4A6` `#F97B58` `#ACD1A8` `#FAC761` `#85ADD6` `#D8B6D8` `#82C4C4` `
 
 渲染逻辑：创建 Tab 对象，根据状态（active/hover/default）+ 标记（admin/WSL/unseen output）生成 6 种渲染变体。
 
+宽度逻辑：`events.tab-title.setup({ min_width = 18 })` 控制最小 tab 宽度，`appearance.lua` 的 `tab_max_width` 控制最大宽度。标题短时补到最小宽度，标题变长时按实际内容拓宽，超过最大宽度后截断。
+
 Glyphs（nerdfonts）：
 - `GLYPH_SCIRCLE_LEFT/RIGHT` — 半圆装饰
 - `GLYPH_CIRCLE` — 未见输出标记

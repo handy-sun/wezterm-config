@@ -19,6 +19,7 @@ require('events.tab-title').setup({
    hide_active_tab_unseen = true,
    unseen_icon = 'numbered_box',
    show_progress = true,
+   min_width = 20,
 })
 require('events.new-tab-button').setup()
 require('events.gui-startup').setup()
