@@ -1,18 +1,6 @@
-local wezterm = require("wezterm")
--- local gpu_adapters = require("utils.gpu_adapter")
-local BACKDROP_OVERLAY = "#1f1f28"
 local platform = require("utils.platform")
 
-local window_frame = {
-    active_titlebar_bg = "#0F2536",
-    inactive_titlebar_bg = "#0F2536"
-}
 local window_decorations = nil
-
-if platform.is_win or platform.is_mac then
-    -- Fancy tab bar height follows the window frame font size on Windows.
-    window_frame.font_size = 12.0
-end
 
 if not platform.is_linux then
     window_decorations = "INTEGRATED_BUTTONS|RESIZE"
@@ -37,7 +25,6 @@ return {
    default_cursor_style = 'BlinkingBlock',
    cursor_blink_rate = 650,
 
-    -- color_scheme = 'Ocean (base16)',
     color_scheme = "qimocha",
 
    -- background: pass in `true` if you want wezterm to start with focus mode on (no bg images)
