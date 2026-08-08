@@ -200,11 +200,11 @@ local keys = {
     { key = "j",     mods = mod.SUPER_REV, action = act.ActivatePaneDirection("Down") },
     { key = "h",     mods = mod.SUPER_REV, action = act.ActivatePaneDirection("Left") },
     { key = "l",     mods = mod.SUPER_REV, action = act.ActivatePaneDirection("Right") },
-    {
-        key = "p",
-        mods = mod.SUPER_REV,
-        action = act.PaneSelect({ alphabet = "1234567890", mode = "SwapWithActiveKeepFocus" }),
-    },
+    -- {
+    --     key = "p",
+    --     mods = mod.SUPER_REV,
+    --     action = act.PaneSelect({ alphabet = "1234567890", mode = "SwapWithActiveKeepFocus" }),
+    -- },
 
    -- panes: scroll pane
    { key = 'u',        mods = mod.SUPER, action = act.ScrollByLine(-5) },
