@@ -10,8 +10,10 @@ local backdrops = require('utils.backdrops')
 
 ---@type Config
 return {
-   max_fps = 120,
-   front_end = platform.is_linux and 'OpenGL' or 'WebGpu', ---@type 'WebGpu' | 'OpenGL' | 'Software'
+   max_fps = 360,
+   -- front_end = platform.is_linux and 'OpenGL' or 'WebGpu', ---@type 'WebGpu' | 'OpenGL' | 'Software'
+   -- !!! OpenGL renders blank with the current Intel/Mesa stack on buking.
+   front_end = 'WebGpu', ---@type 'WebGpu' | 'OpenGL' | 'Software'
    webgpu_power_preference = 'HighPerformance',
    webgpu_preferred_adapter = gpu_adapters:pick_best(),
    -- webgpu_preferred_adapter = gpu_adapters:pick_manual('Dx12', 'IntegratedGpu'),
@@ -25,17 +27,17 @@ return {
    default_cursor_style = 'BlinkingBlock',
    cursor_blink_rate = 650,
 
-    color_scheme = "qimocha",
+   color_scheme = "qimocha",
 
    -- background: pass in `true` if you want wezterm to start with focus mode on (no bg images)
    background = backdrops:initial_options({ no_img = true }),
 
     -- scrollbar
-    enable_scroll_bar = true,
-    min_scroll_bar_height = "3cell",
-    colors = {
-        scrollbar_thumb = "#34354D",
-    },
+   enable_scroll_bar = true,
+   min_scroll_bar_height = "3cell",
+   colors = {
+      scrollbar_thumb = "#34354D",
+   },
 
    -- tab bar
    enable_tab_bar = true,

@@ -77,7 +77,7 @@ local function battery_info()
     local icon = ""
 
     for _, b in ipairs(wezterm.battery_info()) do
-        local idx = math.clamp(math.round(b.state_of_charge * 10), 1, 10)
+        local idx = umath.clamp(umath.round(b.state_of_charge * 10), 1, 10)
         charge = string.format("%.0f%%", b.state_of_charge * 100)
 
         if b.state == "Charging" then
